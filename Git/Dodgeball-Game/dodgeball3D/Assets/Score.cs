@@ -14,8 +14,9 @@ public class Score : MonoBehaviour {
 	void Update () {
         if (CameraController.hitCount > 0)
         {
-            score.text = CameraController.hitCount.ToString();
-        } else
+            score.text = "Lives Left: " + CameraController.hitCount.ToString();
+        } 
+		else
         {
             score.text = "Game Over";
         }

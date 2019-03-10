@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
 	public float camshift=0;
     public bool hitFlag = false;
         // Player properties
-    public bool isAlive;
+    public static bool isAlive;
 	public static int hitCount;
 	// Use this for initialization
 	void Start () {
