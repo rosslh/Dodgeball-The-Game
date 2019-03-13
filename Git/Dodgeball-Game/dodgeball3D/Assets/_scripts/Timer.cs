@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour {
 	private Text timer; 
-	private float tim = 0;
+	private float tim;
 	// Use this for initialization
 	void Start () {
 		timer = GetComponent<Text>();
@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour {
 	void Update () {
 		if (CameraController.isAlive) {
 			tim += Time.deltaTime;
+			CameraController.timeSurvived = tim;
 			timer.text = "Time: " + Mathf.Round(tim).ToString ();
 		} 
 

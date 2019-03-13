@@ -20,7 +20,9 @@ public class Score : MonoBehaviour {
 		else
         {
             score.text = "Game Over";
-        	SceneManager.LoadScene (2);
+			PlayerPrefs.SetString("timeSurvived", CameraController.timeSurvived.ToString());
+			Debug.Log(CameraController.timeSurvived);
+        	SceneManager.LoadScene(2);
         }
        
 	}
