@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour {
 	private Text score; 
@@ -19,6 +20,7 @@ public class Score : MonoBehaviour {
 		else
         {
             score.text = "Game Over";
+        	SceneManager.LoadScene (2);
         }
        
 	}
