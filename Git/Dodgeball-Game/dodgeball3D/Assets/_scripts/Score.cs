@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class Score : MonoBehaviour {
-	private Text score; 
-	// Use this for initialization
-	void Start () {
-		score = GetComponent<Text>(); 
-	}
+public class Score : MonoBehaviour
+{
+    private Text score;
+    // Use this for initialization
+    void Start()
+    {
+        score = GetComponent<Text>();
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         if (CameraController.hitCount > 0)
         {
             score.text = "Lives Left: " + CameraController.hitCount.ToString();
-        } 
-		else
+        }
+        else
         {
             score.text = "Game Over";
+            PlayerPrefs.SetFloat("timeSurvived", CameraController.timeSurvived);
+            Debug.Log(CameraController.timeSurvived);
+            SceneManager.LoadScene(2);
         }
-       
-	}
+
+    }
 }

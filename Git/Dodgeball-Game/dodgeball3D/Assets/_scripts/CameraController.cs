@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
         // Player properties
     public static bool isAlive;
 	public static int hitCount;
+	public static float timeSurvived;
 	// Use this for initialization
 	void Start () {
 		bc = GetComponent<BoxCollider> ();
