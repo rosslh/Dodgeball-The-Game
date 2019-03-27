@@ -37,6 +37,13 @@ public class CameraController : MonoBehaviour {
 			transform.position= (transform.position + new Vector3 (camshift, 0)* Time.fixedDeltaTime);
 		}
 
+        // if (wiimote.Button.d_left){
+        //     transform.position= (transform.position + new Vector3 (-camshift, 0)* Time.fixedDeltaTime);
+        // //     rb.AddForce(movement * speed); 
+        // }
+        // if (wiimote.Button.d_right){
+        //     transform.position= (transform.position + new Vector3 (camshift, 0)* Time.fixedDeltaTime);
+        // }
 
 		//Wiimote manager checks to see if wiimote is still connected
 		if (!WiimoteManager.HasWiimote())
@@ -49,15 +56,16 @@ public class CameraController : MonoBehaviour {
         } while (ret > 0); 
 		//GetIRMidpoint provides position data where pointer[0] is x direction from 0-1
 		//and pointer[1] is y direction from 0-1
-		float[] pointer = wiimote.Ir.GetIRMidpoint(false);
+		float[] pointer = wiimote.Ir.GetIRMidpoint(true);
         float x = (float)pointer[0];
         int horizontal = 0;
+        // print(x.ToString());
 
-        if (x > 0.1 && x < 0.5){ //left movement
+        if (x > 0.1 && x > 0.65){ //left movement
             transform.position= (transform.position + new Vector3 (-camshift, 0)* Time.fixedDeltaTime);
             print("left");
         }
-        else if(x > 0.1 && x > 0.5){ //right movement
+        else if(x > 0.1 && x < 0.35){ //right movement
             transform.position= (transform.position + new Vector3 (camshift, 0)* Time.fixedDeltaTime);
             print("right");
 		}
@@ -71,18 +79,12 @@ public class CameraController : MonoBehaviour {
     // Check for ball trigger
     private void OnTriggerEnter(Collider other)
     {
-        if (hitFlag == false)
+        if (other.tag == "ball")
         {
-            if (other.tag == "ball")
-            {
-                isAlive = PlayerHit(1);
-                hitFlag = true;
-            }
+            isAlive = PlayerHit(1);
         }
-        else
-        {
-            hitFlag = false;
-        }
+        
+
     }
 
     private bool PlayerHit(int damage)

@@ -211,8 +211,8 @@ namespace WiimoteApi
             float[,] sensorIR = GetProbableSensorBarIR(predict);
             ret[0] = sensorIR[0, 0] + sensorIR[1, 0];
             ret[1] = sensorIR[0, 1] + sensorIR[1, 1];
-            ret[0] /= 2f * 1023f;
-            ret[1] /= 2f * 767f;
+            ret[0] /= (2f * 1023f);
+            ret[1] /= (2f * 767f);
 
             return ret;
         }
