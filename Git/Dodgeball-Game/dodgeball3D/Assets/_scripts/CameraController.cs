@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using WiimoteApi;//wiimote library
@@ -6,7 +6,8 @@ public class CameraController : MonoBehaviour {
 	private BoxCollider bc;
 	//Wiimote object
 	private Wiimote wiimote;
-	public float camshift=0;
+	public float camshiftHorizontal = 0;
+    public float camshiftVertical = 0;
     public bool hitFlag = false;
         // Player properties
     public static bool isAlive;
@@ -29,13 +30,20 @@ public class CameraController : MonoBehaviour {
             //Do something for dying
             Debug.Log("ded");
         }
+
         if (Input.GetKey (KeyCode.LeftArrow)){
 			//transform.position = transform.position + new Vector3 (-camshift, 0);
-			transform.position= (transform.position + new Vector3 (-camshift, 0)* Time.fixedDeltaTime);
+			transform.position = (transform.position + new Vector3 (-camshiftHorizontal, 0)* Time.fixedDeltaTime);
 		}
 		if(Input.GetKey (KeyCode.RightArrow)){
-			transform.position= (transform.position + new Vector3 (camshift, 0)* Time.fixedDeltaTime);
+			transform.position = (transform.position + new Vector3 (camshiftHorizontal, 0)* Time.fixedDeltaTime);
 		}
+        if(Input.GetKey (KeyCode.UpArrow)){
+            transform.position = (transform.position + new Vector3 (0, camshiftVertical)* Time.fixedDeltaTime);
+        }
+        if(Input.GetKey (KeyCode.DownArrow)){
+            transform.position = (transform.position + new Vector3 (0, -camshiftVertical)* Time.fixedDeltaTime);
+        }
 
         // if (wiimote.Button.d_left){
         //     transform.position= (transform.position + new Vector3 (-camshift, 0)* Time.fixedDeltaTime);
@@ -58,18 +66,34 @@ public class CameraController : MonoBehaviour {
 		//and pointer[1] is y direction from 0-1
 		float[] pointer = wiimote.Ir.GetIRMidpoint(true);
         float x = (float)pointer[0];
+        float y = (float)pointer[1];
         int horizontal = 0;
+        int vertical = 0;
         // print(x.ToString());
-
-        if (x > 0.1 && x > 0.65){ //left movement
-            transform.position= (transform.position + new Vector3 (-camshift, 0)* Time.fixedDeltaTime);
-            print("left");
+        if (x > 0.1 || y > 0.1){
+            if (x > 0.1 && x > 0.65){ //left movement
+                camshiftHorizontal = -camshiftHorizontal;
+                print("left");
+            }
+            else if(x > 0.1 && x < 0.35){ //right movement
+                print("right");
+            }
+            else{
+                camshiftHorizontal = 0;
+            }
+            //Vertical
+            if (y > 0.1 && y < 0.35){ //down movement
+                print("down");
+                camshiftVertical = -camshiftVertical;
+            }
+            else if(y > 0.1 && y > 0.65){
+                print("up");
+            }
+            else{
+                camshiftVertical = 0;
+            }
+            transform.position= (transform.position + new Vector3 (camshiftHorizontal, camshiftVertical)* Time.fixedDeltaTime);
         }
-        else if(x > 0.1 && x < 0.35){ //right movement
-            transform.position= (transform.position + new Vector3 (camshift, 0)* Time.fixedDeltaTime);
-            print("right");
-		}
-
 	}
 	void OnApplicationQuit() {//Called when appliation is about to exit
         FinishedWithWiimotes();//cleans up the wii remote connection
