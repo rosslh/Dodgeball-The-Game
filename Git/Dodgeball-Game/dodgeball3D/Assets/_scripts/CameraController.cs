@@ -107,6 +107,10 @@ public class CameraController : MonoBehaviour {
         {
             isAlive = PlayerHit(1);
         }
+        else
+        {
+            isAlive = PlayerHit(-1);
+        }
         
 
     }
