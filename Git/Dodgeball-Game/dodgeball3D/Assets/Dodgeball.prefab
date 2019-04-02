@@ -59,7 +59,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1cdcfd77f3ee7408b92d731a6cd970be, type: 2}
+  - {fileID: 2100000, guid: c6c3b685612a94a65bbc0711817311d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   speed: 2
   suby: 1.5
   subx: -0.85
+  ballSpeed: 0
 --- !u!135 &135085341287767294
 SphereCollider:
   m_ObjectHideFlags: 1
