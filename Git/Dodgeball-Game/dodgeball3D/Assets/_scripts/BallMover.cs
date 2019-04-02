@@ -17,7 +17,7 @@ public class BallMover : MonoBehaviour {
         	System.Random rand = new System.Random();
 		ballSpeed = 12;
 		player = GameObject.FindWithTag("MainCamera").GetComponent<BoxCollider> ();
-        currentposition = player.transform.position + new Vector3(rand.Next(-2,2),0,0);
+        currentposition = player.transform.position + new Vector3(rand.Next(-3,3),0,0);
 	}
 	
 	// Update is called once per frame
@@ -29,7 +29,9 @@ public class BallMover : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter () {
-		Destroy (gameObject); 
+	void OnTriggerEnter (Collider col) {
+        if (col.tag == "MainCamera") {
+            Destroy (gameObject); 
+        }
 	}
 }

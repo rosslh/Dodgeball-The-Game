@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 	private BoxCollider bc;
 	//Wiimote object
 	private Wiimote wiimote;
+
 	public float camshiftHorizontal = 0;
     public float camshiftVertical = 0;
     public bool hitFlag = false;
@@ -13,12 +14,16 @@ public class CameraController : MonoBehaviour {
     public static bool isAlive;
 	public static int hitCount;
 	public static float timeSurvived;
+
+    public static float maxY;
+
 	// Use this for initialization
 	void Start () {
 		bc = GetComponent<BoxCollider> ();
         // Initialize Player properties
         isAlive = true;
         hitCount = 5;
+        maxY = transform.position.y;
 		//Initializes wiimote
 		InitWiiMote();
     }
@@ -38,7 +43,7 @@ public class CameraController : MonoBehaviour {
 		if(Input.GetKey (KeyCode.RightArrow)){
 			transform.position = (transform.position + new Vector3 (camshiftHorizontal, 0)* Time.fixedDeltaTime);
 		}
-        if(Input.GetKey (KeyCode.UpArrow)){
+        if(Input.GetKey (KeyCode.UpArrow) && transform.position.y < maxY){
             transform.position = (transform.position + new Vector3 (0, camshiftVertical)* Time.fixedDeltaTime);
         }
         if(Input.GetKey (KeyCode.DownArrow)){

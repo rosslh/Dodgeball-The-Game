@@ -25,7 +25,7 @@ public class BallMaker : MonoBehaviour {
 		while (true) {
 		yield return new WaitForSeconds (waitforsec);
            	System.Random rand = new System.Random();
-            	int a = rand.Next(0, 5);
+            	int a = rand.Next(0, 9);
            	if (a == 4) {
                 	Instantiate(powerupPrefab, opppos + new Vector3(0, 1), Quaternion.identity);
             	} else
