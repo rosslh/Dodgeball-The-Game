@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BallMaker : MonoBehaviour {
 	public Rigidbody ballPrefab;
+	public Rigidbody powerupPrefab;
 	public float waitforsec;
 	private Rigidbody opponent; 
 	private Vector3 opppos;
