@@ -22,9 +22,17 @@ public class BallMaker : MonoBehaviour {
 	IEnumerator Waiting()
 	{
 		while (true) {
-			yield return new WaitForSeconds (waitforsec);
-			Instantiate (ballPrefab, opppos + new Vector3 (1, 2), Quaternion.Euler(0,180,0));
-		}
+		yield return new WaitForSeconds (waitforsec);
+           	System.Random rand = new System.Random();
+            	int a = rand.Next(0, 5);
+           	if (a == 4) {
+                	Instantiate(powerupPrefab, opppos + new Vector3(0, 1), Quaternion.identity);
+            	} else
+            	{
+                	Instantiate(ballPrefab, opppos + new Vector3(0, 1), Quaternion.identity);
+            	}
+            
+        	}
 	}
 
 }
