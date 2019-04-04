@@ -534,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vol: 1
   ouchSound: {fileID: 8300000, guid: 8c16bebadfc0f46799e8547bc9a1335e, type: 3}
+  powerSound: {fileID: 8300000, guid: 14472fca9eb914f7c864a11aa5b5c79a, type: 3}
 --- !u!82 &217024592
 AudioSource:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
         // Initialize Player properties
         isAlive = true;
         hitCount = 5;
-        maxY = transform.position.y + 1;
+        maxY = transform.position.y;
 		//Initializes wiimote
 		InitWiiMote();
     }

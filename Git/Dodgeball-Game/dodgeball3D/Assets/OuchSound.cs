@@ -5,12 +5,14 @@ using UnityEngine;
 public class OuchSound : MonoBehaviour {
 	public float vol; 
 	public AudioClip ouchSound;
+    public AudioClip powerSound;
 	private AudioSource source;
 
 	// Use this for initialization
 
 	void Start () {
 		source = GetComponent<AudioSource>();
+        
 	}
 	
 	// Update is called once per frame
@@ -24,6 +26,9 @@ public class OuchSound : MonoBehaviour {
 		{
 			source.PlayOneShot(ouchSound,vol);
 		}
+        if (other.tag == "powerup"){
+            source.PlayOneShot(powerSound, vol);
+        }
 
 
 	}
