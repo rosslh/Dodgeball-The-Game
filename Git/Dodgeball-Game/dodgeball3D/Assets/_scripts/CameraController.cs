@@ -23,13 +23,13 @@ public class CameraController : MonoBehaviour {
         // Initialize Player properties
         isAlive = true;
         hitCount = 5;
-        maxY = transform.position.y;
+        maxY = transform.position.y + 1;
 		//Initializes wiimote
 		InitWiiMote();
     }
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	void Update () {
         if (isAlive == false)
         {
             //Do something for dying
@@ -72,32 +72,25 @@ public class CameraController : MonoBehaviour {
 		float[] pointer = wiimote.Ir.GetIRMidpoint(true);
         float x = (float)pointer[0];
         float y = (float)pointer[1];
-        int horizontal = 0;
-        int vertical = 0;
         // print(x.ToString());
         if (x > 0.1 || y > 0.1){
-            if (x > 0.1 && x > 0.65){ //left movement
-                camshiftHorizontal = -camshiftHorizontal;
+            if (x > 0.1 && x > 0.6){ //left movement
                 print("left");
+                transform.position = (transform.position + new Vector3 (-camshiftHorizontal, 0)* Time.fixedDeltaTime);
             }
-            else if(x > 0.1 && x < 0.35){ //right movement
+            else if(x > 0.1 && x < 0.4){ //right movement
                 print("right");
-            }
-            else{
-                camshiftHorizontal = 0;
+                transform.position = (transform.position + new Vector3 (camshiftHorizontal, 0)* Time.fixedDeltaTime);
             }
             //Vertical
-            if (y > 0.1 && y < 0.35){ //down movement
+            if (y > 0.1 && y < 0.4){ //down movement
                 print("down");
-                camshiftVertical = -camshiftVertical;
+                transform.position = (transform.position + new Vector3 (0, -camshiftVertical)* Time.fixedDeltaTime);
             }
-            else if(y > 0.1 && y > 0.65){
+            else if(y > 0.1 && y > 0.6 && transform.position.y < maxY){//up
                 print("up");
+                transform.position = (transform.position + new Vector3 (0, camshiftVertical)* Time.fixedDeltaTime);
             }
-            else{
-                camshiftVertical = 0;
-            }
-            transform.position= (transform.position + new Vector3 (camshiftHorizontal, camshiftVertical)* Time.fixedDeltaTime);
         }
 	}
 	void OnApplicationQuit() {//Called when appliation is about to exit
